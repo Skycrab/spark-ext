@@ -402,7 +402,8 @@ class SplitBinStrategy(val positions: List[List[Int]], val splitsStat: Map[Int, 
     val goodTotal = splitsStat.head._2.goodTotal
     val badTotal = splitsStat.head._2.badTotal
     val woeIvs = positions.map{ positions =>
-      val binStats = positions.filter(p => splitKeys.contains(p)).map(splitsStat.get(_).get)
+//      val binStats = positions.filter(p => splitKeys.contains(p)).map(splitsStat.get(_).get)
+      val binStats = positions.collect(splitsStat)
       val goodCnt = binStats.map(_.goodCnt).sum
       val badCnt = binStats.map(_.badCnt).sum
       val goodCntCorrect = math.max(1, goodCnt)
